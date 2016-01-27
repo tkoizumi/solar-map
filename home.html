@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script
+src="http://maps.googleapis.com/maps/api/js">
+</script>
+
+<script>
+var x=new google.maps.LatLng(40.356887,-74.661940);
+var stavanger=new google.maps.LatLng(40.357120,-74.662049);
+var amsterdam=new google.maps.LatLng(40.357149, -74.661906);
+var london=new google.maps.LatLng(40.356901,-74.661802);
+var corner4=new google.maps.LatLng(40.356887,-74.661940);
+
+function initialize()
+{
+var mapProp = {
+  center:x,
+  zoom:20,
+  mapTypeId: google.maps.MapTypeId.ROADMAP
+  };
+  
+var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+var myTrip=[stavanger,amsterdam,london,corner4,stavanger];
+var flightPath=new google.maps.Polygon({
+  path:myTrip,
+  strokeColor:"#0000FF",
+  strokeOpacity:0.8,
+  strokeWeight:2,
+  fillColor:"#0000FF",
+  fillOpacity:0.4
+  });
+
+flightPath.setMap(map);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+</head>
+
+<body>
+<div id="googleMap" style="width:500px;height:380px;"></div>
+</body>
+</html>
