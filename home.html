@@ -14,9 +14,12 @@
         height: 100%;
       }
     </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   </head>
-  <body>
+  <body class="container">
   <h1>System Design Bitches</h1>
+  <button onclick=panelLayout(document.getElementById("numberOfPanels").value)>Initialize Design</button>
+  <input type="number" id="numberOfPanels" value="0">
     <div id="map"></div>
     <script>
 // This example creates draggable triangles on the map.
@@ -24,6 +27,14 @@
 // as you drag it north or south.
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 20,
+    center: {lat: 40.356966, lng: -74.661831},
+    mapTypeId: google.maps.MapTypeId.SATELLITE
+  });
+}
+
+function panelLayout(numPanels){
+   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 20,
     center: {lat: 40.356966, lng: -74.661831},
     mapTypeId: google.maps.MapTypeId.SATELLITE
@@ -54,15 +65,15 @@ function initMap() {
   
   var solarCoords = []; 
 
-  for(i=0;i<12;i++){
+  for(i=0;i<numPanels;i++){
   solarCoords.push(redCoords)
   console.log(solarCoords)
   solarCoords[i][0].lat = redCoords[1].lat;
-  solarCoords[i][0].lng = redCoords[1].lng + solar_spec.length;
   solarCoords[i][1].lat = solarCoords[i][0].lat; 
   solarCoords[i][2].lat = solarCoords[i][1].lat - solar_spec.width; 
   solarCoords[i][3].lat = solarCoords[i][2].lat; 
 
+  solarCoords[i][0].lng = redCoords[1].lng + solar_spec.length;
   solarCoords[i][1].lng = solarCoords[i][0].lng + solar_spec.length; 
   solarCoords[i][2].lng = solarCoords[i][1].lng; 
   solarCoords[i][3].lng = solarCoords[i][0].lng; 
