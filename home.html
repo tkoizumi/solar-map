@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,22 +21,14 @@
 // This example creates draggable triangles on the map.
 // Note also that the red triangle is geodesic, so its shape changes
 // as you drag it north or south.
-
 function initMap() {
-
   var map = new google.maps.Map(document.getElementById('map'), {
     zoom: 20,
     center: {lat: 40.356966, lng: -74.661831},
     mapTypeId: google.maps.MapTypeId.SATELLITE
   });
 
-  var blueCoords = [
-    {lat: 40.357113, lng: -74.662037},
-    {lat: 40.357120, lng: -74.662006},
-    {lat: 40.357110, lng: -74.662008},
-    {lat: 40.357106, lng: -74.662037}
-    
-  ];
+  var solar_spec = {width:0.000015, length:0.0000065};
 
   // [START region_red_triangle]
   var redCoords = [
@@ -47,7 +38,6 @@ function initMap() {
     {lat: 40.356966, lng: -74.661831}
   ];
 
-  // Construct a draggable red triangle with geodesic set to true.
   new google.maps.Polygon({
     map: map,
     paths: redCoords,
@@ -59,12 +49,35 @@ function initMap() {
     draggable: false,
     geodesic: true
   });
-  // [END region_red_triangle]
 
-  // Construct a draggable blue triangle with geodesic set to false.
-  new google.maps.Polygon({
+    var solarCoords = [[
+    {lat: redCoords[1].lat, lng: redCoords[1].lng},
+    {lat: 0, lng: 0},
+    {lat: 0, lng: 0},
+    {lat: 0, lng: 0}
+    
+  ],[
+    {lat: redCoords[1].lat, lng: redCoords[1].lng + solar_spec.length*1.9},
+    {lat: 0, lng: 0},
+    {lat: 0, lng: 0},
+    {lat: 0, lng: 0}
+    
+  ]]; 
+
+    
+
+  for(i=0;i<2;i++){  
+  solarCoords[i][1].lat = solarCoords[i][0].lat; 
+  solarCoords[i][2].lat = solarCoords[i][1].lat - solar_spec.width; 
+  solarCoords[i][3].lat = solarCoords[i][2].lat; 
+
+  solarCoords[i][1].lng = solarCoords[i][0].lng + solar_spec.length; 
+  solarCoords[i][2].lng = solarCoords[i][1].lng; 
+  solarCoords[i][3].lng = solarCoords[i][0].lng; 
+
+new google.maps.Polygon({
     map: map,
-    paths: blueCoords,
+    paths: solarCoords[i],
     strokeColor: '#0000FF',
     strokeOpacity: 0.8,
     strokeWeight: 2,
@@ -73,8 +86,14 @@ function initMap() {
     draggable: true,
     geodesic: false
   });
-}
 
+  }
+  // Construct a draggable red triangle with geodesic set to true.
+
+  // [END region_red_triangle]
+  // Construct a draggable blue triangle with geodesic set to false.
+  
+}
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-dvhvmVJccEPUoL78VOqhEXLX1xH8oGo&callback=initMap&signed_in=true" async defer>
     </script>
