@@ -16,6 +16,7 @@
     </style>
   </head>
   <body>
+  <h1>System Design Bitches</h1>
     <div id="map"></div>
     <script>
 // This example creates draggable triangles on the map.
@@ -50,23 +51,14 @@ function initMap() {
     geodesic: true
   });
 
-    var solarCoords = [[
-    {lat: redCoords[1].lat, lng: redCoords[1].lng},
-    {lat: 0, lng: 0},
-    {lat: 0, lng: 0},
-    {lat: 0, lng: 0}
-    
-  ],[
-    {lat: redCoords[1].lat, lng: redCoords[1].lng + solar_spec.length*1.9},
-    {lat: 0, lng: 0},
-    {lat: 0, lng: 0},
-    {lat: 0, lng: 0}
-    
-  ]]; 
+  
+  var solarCoords = []; 
 
-    
-
-  for(i=0;i<2;i++){  
+  for(i=0;i<12;i++){
+  solarCoords.push(redCoords)
+  console.log(solarCoords)
+  solarCoords[i][0].lat = redCoords[1].lat;
+  solarCoords[i][0].lng = redCoords[1].lng + solar_spec.length;
   solarCoords[i][1].lat = solarCoords[i][0].lat; 
   solarCoords[i][2].lat = solarCoords[i][1].lat - solar_spec.width; 
   solarCoords[i][3].lat = solarCoords[i][2].lat; 
