@@ -10,6 +10,9 @@
         margin: 0;
         padding: 0;
       }
+      .nav-bar {
+        margin:20px;
+      }
       #map {
         height: 100%;
       }
@@ -17,9 +20,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   </head>
   <body class="container">
+  <div class="nav-bar">
   <h1>System Design Bitches</h1>
   <button onclick=panelLayout(document.getElementById("numberOfPanels").value)>Initialize Design</button>
   <input type="number" id="numberOfPanels" value="0">
+  </div>  
     <div id="map"></div>
     <script>
 // This example creates draggable triangles on the map.
@@ -61,7 +66,6 @@ function panelLayout(numPanels){
     draggable: false,
     geodesic: true
   });
-
   
   var solarCoords = []; 
 
@@ -71,7 +75,7 @@ function panelLayout(numPanels){
   solarCoords[i][0].lat = redCoords[1].lat;
   solarCoords[i][1].lat = solarCoords[i][0].lat; 
   solarCoords[i][2].lat = solarCoords[i][1].lat - solar_spec.width; 
-  solarCoords[i][3].lat = solarCoords[i][2].lat; 
+  solarCoords[i][3].lat = solarCoords[i][2].lat;
 
   solarCoords[i][0].lng = redCoords[1].lng + solar_spec.length;
   solarCoords[i][1].lng = solarCoords[i][0].lng + solar_spec.length; 
